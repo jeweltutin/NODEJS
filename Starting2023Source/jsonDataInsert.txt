@@ -1,0 +1,27 @@
+// Single insert
+
+{
+    "title": "Title one",
+    "description": "First des",
+    "status": "active"
+}
+
+//Multi insert
+
+[
+    {
+        "title": "Multi1 title",
+        "description": "Multi1 Nice man",
+        "status": "active"
+    },
+    {
+        "title": "Multi2 title",
+        "description": "Multi2 Nice man",
+        "status": "active"
+    },
+    {
+        "title": "Multi3 title",
+        "description": "Multi3 Nice man",
+        "status": "inactive"
+    }
+]

@@ -1,0 +1,14 @@
+https://www.youtube.com/watch?v=aHEYzt8stHg&ab_channel=ThapaTechnical  // I completed
+
+https://www.youtube.com/watch?v=WC-g0JtEIwM&list=PLHiZ4m8vCp9PHnOIT7gd30PCBoYCpGoQM&ab_channel=LearnwithSumit-LWS-Bangladesh  // Main tutorial following
+
+// Dynamic Web Project Using Node Js, Express and MongoDB in one video in Hindi
+https://www.youtube.com/watch?v=U4CQOxoBAoA&ab_channel=LearnCodeWithDurgesh  
+
+
+// Create a Simple Blog with Node and MongoDB
+https://www.youtube.com/watch?v=PB7pTdFG5H8&ab_channel=CreativeBabar
+
+
+//Authentication System using JWT and Node.js
+https://javascript.plainenglish.io/authentication-systems-using-jwt-and-node-js-9c3cc14aaf82

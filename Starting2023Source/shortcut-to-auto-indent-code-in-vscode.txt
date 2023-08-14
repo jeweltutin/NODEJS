@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/68884005/what-is-the-shortcut-to-auto-indent-code-in-vscode

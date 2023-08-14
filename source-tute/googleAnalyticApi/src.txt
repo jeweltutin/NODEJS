@@ -1,0 +1,8 @@
+https://www.tutscoder.com/post/use-google-analytics-reporting-api-nodejs
+https://www.youtube.com/watch?v=2qa98xBSivw&ab_channel=TutsCoder
+
+https://www.youtube.com/watch?v=0ZQPp7y2Aw4&ab_channel=LetsTryThis%21
+
+https://www.youtube.com/watch?v=teL_9dJDvRw&ab_channel=Keepcoding
+
+https://developers.google.com/analytics/devguides/reporting/data/v1
