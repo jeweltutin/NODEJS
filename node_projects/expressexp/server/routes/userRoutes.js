@@ -5,8 +5,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 const router = Router();
 
 router.route('/').post(registerUser);
-//router.route('/').get(getUsers);
-router.get('/', protect, admin, getUsers);
+router.route('/').get(getUsers);
+//router.get('/', protect, admin, getUsers);
 router.post('/login', authUser);
 //console.log("I am from router");
 export default router;

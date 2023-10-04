@@ -79,7 +79,8 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   // @route POST /api/user/
   // @access Private / Admin
 const getUsers = expressAsyncHandler(async (req, res) => {
-    const users = await User.find().lean();
+    //const users = await User.find().lean();
+	const users = await User.find().select('-password').lean();
     res.json(users);
   });
 
