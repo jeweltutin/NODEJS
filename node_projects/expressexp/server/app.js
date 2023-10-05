@@ -3,11 +3,12 @@ import envfile from 'dotenv';
 import dbconnect from "./config/db.js";
 import consoleColors from 'colors';
 import cors from 'cors'
-import path from 'path';
-import {fileURLToPath} from 'url';
+//import path from 'path';
+//import {fileURLToPath} from 'url';
 
 // Import Routes
 import userRoutes from './routes/userRoutes.js';
+import sliderRoutes from './routes/sliderRoutes.js';
 import newsRoutes from './routes/newsRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
@@ -46,6 +47,7 @@ app.get('/erchk', (rec, res) => {
 
 // Routes
 app.use('/api/user', userRoutes);
+app.use('/api/slide', sliderRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/tasks', taskRoutes);

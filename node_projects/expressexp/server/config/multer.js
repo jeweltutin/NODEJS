@@ -3,7 +3,10 @@ import path from 'path';
 import { nanoid } from "nanoid";
 
 
-const storage = multer.diskStorage({
+/* We call the cb function that takes the two arguments. 
+The first is error which we are going to pass null to. The second is the destination folder which is public. */
+
+const storage = multer.diskStorage({         
     destination: function (req, file, cb) {
         cb(null, path.join('./storage', 'uploads'));
     },
