@@ -7,6 +7,7 @@ import cors from 'cors'
 //import {fileURLToPath} from 'url';
 
 // Import Routes
+import publicRoutes from './routes/publicRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import sliderRoutes from './routes/sliderRoutes.js';
 import newsRoutes from './routes/newsRoutes.js';
@@ -46,6 +47,7 @@ app.get('/erchk', (rec, res) => {
 
 
 // Routes
+app.use('/api/public', publicRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/slide', sliderRoutes);
 app.use('/api/news', newsRoutes);

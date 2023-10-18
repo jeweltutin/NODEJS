@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const dbconnect = async () => {
   try {
     mongoose.set('strictQuery', true);
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {        // Not working with seeder
     //const conn = await mongoose.connect("mongodb://localhost/jeweldb", {
       useUnifiedTopology: true,
       useNewUrlParser: true,
