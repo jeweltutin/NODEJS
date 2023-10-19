@@ -10,6 +10,7 @@ const sliderSchema = new mongoose.Schema(
         priority: { type: Number, required:true, default: 0 },
         isActive: { type: Boolean, default: true },
         paragraph: { type: String},
+        updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     },
     {
         timestamps: true
