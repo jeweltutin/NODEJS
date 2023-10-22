@@ -23,8 +23,8 @@ const createHomeSlide = expressAsyncHandler(async (req, res) => {
 
     const imgfile = req.files.image;
     //console.log(imgfile);
-    //const image = imgfile[0].path.substring(2).replace(/\\/g, '/');
-    const image = imgfile[0].path.replace(/\\/g, '/');
+    const image = imgfile[0].path.substring(2).replace(/\\/g, '/');
+    //const image = imgfile[0].path.replace(/\\/g, '/');
     const priority = (await Slide.countDocuments({})) + 1;   // A record in MongoDB is a document
 
     const newSlide = new Slide({

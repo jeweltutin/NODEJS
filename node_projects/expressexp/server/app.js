@@ -1,9 +1,10 @@
-import express  from "express";
+import express from "express";
 import envfile from 'dotenv';
+import morgan from 'morgan';
 import dbconnect from "./config/db.js";
 import consoleColors from 'colors';
 import cors from 'cors'
-//import path from 'path';
+import path from 'path';
 //import {fileURLToPath} from 'url';
 
 // Import Routes
@@ -19,14 +20,24 @@ app.use(cors())
 envfile.config();
 dbconnect();
 consoleColors.enable();
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 //consoleColors.disable();
 app.use(express.json());
 
+//SLoved system 01
 // Function to serve all static files
-// inside public directory.
-app.use(express.static('storage'));
+// inside public directory. Working good // url will ignore storage folder http://localhost:5000/storage/uploads/bigposter.jpg - need to remove storage from url
+/*app.use(express.static('storage'));
+app.use('/uploads', express.static('uploads'));*/
+
+app.use('/storage', express.static('storage'));
 app.use('/uploads', express.static('uploads'));
 
+
+//SLoved system 02
 /*const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(
@@ -34,6 +45,13 @@ app.use(
     express.static(path.join(__dirname, '../storage/uploads'))
   );*/
 
+//SLoved system 03
+/* const __dirname = path.resolve('storage');
+app.use(
+    '/storage/uploads',
+    express.static(path.join(__dirname, '../storage/uploads'))
+);
+ */
 app.get('/', (req, res) => {
     res.send('Welcome! server working');
 });
@@ -83,11 +101,11 @@ app.use((err, req, res, next) => {
 //const PORT = 3000;
 //app.listen(PORT, console.log("app listening at port 3000"));
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, (error) =>{
-    if(!error)
-        console.log("Server is Successfully Running, and App is listening on port: " .rainbow.italic + PORT.green.bold)
-        //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
-    else 
+app.listen(PORT, (error) => {
+    if (!error)
+        console.log("Server is Successfully Running, and App is listening on port: ".rainbow.italic + PORT.green.bold)
+    //console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
+    else
         console.log("Error occurred, server can't start", error);
-    }
+}
 );

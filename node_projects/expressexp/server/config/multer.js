@@ -8,7 +8,7 @@ The first is error which we are going to pass null to. The second is the destina
 
 const storage = multer.diskStorage({         
     destination: function (req, file, cb) {
-        cb(null, path.join('./storage', 'uploads'));
+        cb(null, path.join('../storage', 'uploads'));
     },
     filename (req, file, cb) {
 

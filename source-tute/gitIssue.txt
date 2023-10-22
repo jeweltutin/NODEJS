@@ -1,0 +1,8 @@
+In order to navigate to a different drive just use
+
+cd /E/Study/Codes
+
+https://stackoverflow.com/questions/38563826/change-drive-in-git-bash-for-windows
+
+
+https://khamkarchinmay4.medium.com/how-to-solve-the-problem-of-git-bash-not-appearing-on-the-right-mouse-click-b75351bea58d
