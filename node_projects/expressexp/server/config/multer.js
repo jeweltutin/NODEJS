@@ -8,7 +8,8 @@ The first is error which we are going to pass null to. The second is the destina
 
 const storage = multer.diskStorage({         
     destination: function (req, file, cb) {
-        cb(null, path.join('../storage', 'uploads'));
+        // cb(null, path.join('../storage', 'uploads')); going outside of the project folder
+        cb(null, path.join('./storage', 'uploads'));
     },
     filename (req, file, cb) {
 
@@ -24,7 +25,7 @@ const storage = multer.diskStorage({
 });
 
 function checkFileType(file, cb){
-    const filetypes = /jpg|jpeg|png|svg|pdf/;
+    const filetypes = /jpg|jpeg|png|webp|svg|pdf/;
     const fileExtention = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
     //console.log(file.mimetype);

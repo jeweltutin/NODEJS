@@ -23,8 +23,8 @@ const createHomeSlide = expressAsyncHandler(async (req, res) => {
 
     const imgfile = req.files.image;
     //console.log(imgfile);
-    const image = imgfile[0].path.substring(2).replace(/\\/g, '/');
-    //const image = imgfile[0].path.replace(/\\/g, '/');
+    //const image = imgfile[0].path.substring(2).replace(/\\/g, '/');
+    const image = imgfile[0].path.replace(/\\/g, '/');
     const priority = (await Slide.countDocuments({})) + 1;   // A record in MongoDB is a document
 
     const newSlide = new Slide({
@@ -35,7 +35,7 @@ const createHomeSlide = expressAsyncHandler(async (req, res) => {
         headingOne,
         headingTwo,
         paragraph,
-        updatedBy: req.userData._id
+        //updatedBy: req.userData._id
     });
 
     try {
@@ -63,7 +63,7 @@ export const updateHomeSlide = expressAsyncHandler(async (req, res) => {
     //console.log(id);
     //res.json(id);
     const updatedData = req.body;
-    console.log(updatedData);
+    //console.log(updatedData);
 
 
     const file = req.files.image;
@@ -85,7 +85,8 @@ export const updateHomeSlide = expressAsyncHandler(async (req, res) => {
             });
             updatedData.image = theImage;
         }
-        updatedData.updatedBy = req.userData._id;
+        //updatedData.updatedBy = req.userData._id;
+        //updatedData.updatedBy = '12345';
         updatedData.updatedAt = Date.now();
 
         await Slide.findByIdAndUpdate(id, {$set: updatedData});
