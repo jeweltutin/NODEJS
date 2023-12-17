@@ -1,0 +1,10 @@
+https://github.com/Automattic/mongoose/issues/8903
+https://sparkbyexamples.com/mongodb/mongodb-find-objects-between-two-dates/     // Very nicely explained
+
+https://stackoverflow.com/questions/21795631/how-to-query-all-data-where-created-today-from-00h00m00s-to-now-in-mongoos  // 
+
+var now = new Date();
+var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+MyModel.find({created_on: {$gte: startOfToday}}, function (err, docs) { ... });
+
+https://dev.to/itz_giddy/how-to-query-documents-in-mongodb-that-fall-within-a-specified-date-range-using-mongoose-and-node-524a

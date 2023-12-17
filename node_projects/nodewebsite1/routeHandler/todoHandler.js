@@ -55,7 +55,7 @@ router.get("/active", checkLogin, async (req, res) => {
 
 });
 
-// GET result by name like % % with static methods
+// Static methods: GET result by name like % % with 
 router.get("/name", async (rec, res) => {
    const data = await TodoModel.findByName();
     res.status(200).json({
@@ -63,7 +63,7 @@ router.get("/name", async (rec, res) => {
     });
 });
 
-// GET result by title like % % with query methods
+// Query methods: GET result by title like % % with
 router.get("/title", async (rec, res) => {
     const data = await TodoModel.find().byTitle("ult");
      res.status(200).json({

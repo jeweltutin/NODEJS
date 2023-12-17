@@ -1,0 +1,53 @@
+// insert array of object in mongoose ExpressJs
+
+https://stackoverflow.com/questions/73735656/how-to-insert-array-of-object-in-mongoose-expressjs?rq=1
+
+I want to insert any product that will have some info and different size with price. I can insert all other data but array of object(size with price) is not storing in mongo.
+
+//Here is my Product Schema:
+
+const productSchema = new mongoose.Schema({
+    product_name: {type:String, required: true},
+    product_desc: {type: String, required:true},
+    prod_cat: {type: mongoose.Schema.Types.ObjectId,ref: 'Category'},
+    prod_img: {type: String},
+    pro_price: [{
+        prod_size: {type: String,},
+        prod_price: {type: String}
+    }]
+},{timestamps: true})
+const prodSchema = mongoose.model('Product',productSchema)
+
+//this is my controller to post that data:
+
+ async postProduct(req,res){
+            try{
+                
+                const newProduct = new prodSchema({
+                    product_name: req.body.productName,
+                    product_desc: req.body.productDetails,
+                    prod_cat: req.body.category,
+                    pro_price: req.body.pro
+                })
+                
+                console.log(newProduct);
+                const addProduct = newProduct.save()
+                
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+
+//I have sent data from a form and the object looks like this:
+
+{
+  productName: 'Margerita',
+  productDetails: 'Served with onion, garlic sauce, meat slice, white sauce',
+  category: '63221514e6b0279b001b9187',
+  pro: [
+    { prod_size: 'Medium', prod_price: '750' },
+    { prod_size: 'Big', prod_price: '900' },
+    { prod_size: 'Small', prod_price: '500' }
+  ]
+}
