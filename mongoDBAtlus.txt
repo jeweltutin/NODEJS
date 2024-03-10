@@ -1,0 +1,11 @@
+// DB user Info
+username: jeweltutin
+MongodbPass: m0tLp7QWvxdq4HgX
+
+
+https://cloud.mongodb.com/
+email : jeweltutin@gmail.com
+pass: no**3
+
+
+

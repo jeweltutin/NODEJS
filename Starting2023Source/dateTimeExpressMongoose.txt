@@ -1,6 +1,14 @@
 https://github.com/Automattic/mongoose/issues/8903
 https://sparkbyexamples.com/mongodb/mongodb-find-objects-between-two-dates/     // Very nicely explained
 
+// How to query documents at a specific date in Mongoose
+https://attacomsian.com/blog/mongoose-query-specific-date
+https://mongoosejs.com/docs/tutorials/dates.html
+https://www.digitalocean.com/community/tutorials/js-date-fns
+
+//How to query all data where `created` today (from 00h:00m:00s to now) in mongoose?
+https://stackoverflow.com/questions/21795631/how-to-query-all-data-where-created-today-from-00h00m00s-to-now-in-mongoos
+
 https://stackoverflow.com/questions/21795631/how-to-query-all-data-where-created-today-from-00h00m00s-to-now-in-mongoos  // 
 
 var now = new Date();
@@ -8,3 +16,15 @@ var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 MyModel.find({created_on: {$gte: startOfToday}}, function (err, docs) { ... });
 
 https://dev.to/itz_giddy/how-to-query-documents-in-mongodb-that-fall-within-a-specified-date-range-using-mongoose-and-node-524a
+
+
+
+
+https://www.youtube.com/watch?v=6NKxqklzxi4&ab_channel=LearnwithSumit-LWS-Bangladesh // Date basics
+https://www.youtube.com/watch?v=Kf0B6r4kmE4&ab_channel=LearnwithSumit-LWS-Bangladesh
+
+//Mastering Date Queries in MongoDB: $year, $month, $dateToString, and More
+https://www.youtube.com/watch?v=ZFhLaufhxYg&t=323s&ab_channel=EngineeringDigest
+
+//How to Convert Date Format In Nodejs | DD-MM-YYYY or MM-DD-YYYY or DD-MM Date format
+https://www.youtube.com/watch?v=GSXKz3bPZd8&ab_channel=TechnophileFirdous

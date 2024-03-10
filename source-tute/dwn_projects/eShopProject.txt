@@ -1,0 +1,3 @@
+https://github.com/bluebits-academy/nodejs-eshop-api-course
+
+https://www.youtube.com/watch?v=hPv9QwvliEM&list=PLzb46hGUzitBp584kLyn6l3i6yC-rXlmN&index=2&ab_channel=CourseOnDemand

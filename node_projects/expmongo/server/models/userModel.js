@@ -1,10 +1,20 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-    name: {
+    /* name: {
         type: String,
         required: true
-    },
+    }, */
+    name: [
+        {
+            first: {
+                type: String
+            },
+            last: {
+                type: String
+            }
+        }
+    ],
     username: {
         type: String,
         unique: true,
@@ -26,7 +36,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         enum: [0, 1, 2],
         default: 1
-    }, 
+    },
     status: {
         type: String,
         enum: ["active", "inactive"],

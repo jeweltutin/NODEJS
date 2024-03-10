@@ -1,0 +1,186 @@
+{
+    "requisitionNo": "Req:10 Up check",
+    "description": "Pen is needed for all update",
+    "title": "Pen - Tissue - Coffie Needed update",
+    "date":"2022-03-05",
+    "items": [
+        {
+            "goodsId": "65e6a541bac79320bad69f45",
+            "goodsName": "Pen",
+            "party": "656c14fd82b121d38bae55de",
+            "unit": "Pcs",
+            "ratePerUnit": 10,
+            "goodsQuantity": 30,
+            "totalPrice": 300
+        },
+        {
+            "goodsId": "65b6080bb13836a3d29f228b",
+             "goodsName": "Coffie",
+             "party": "657ec401a624c5a9f282ec0f",
+            "unit": "Pcs",
+            "ratePerUnit": 15,
+            "goodsQuantity": 10,
+            "totalPrice": 150
+        },
+        {
+            "goodsId": "65b607ccb13836a3d29f2283",
+             "goodsName": "Tissue",
+             "party": "656c14fd82b121d38bae55de",
+            "unit": "Pcs",
+            "ratePerUnit": 50,
+            "goodsQuantity": 10,
+            "totalPrice": 500
+        }
+    ]
+   
+}
+
+
+
+// @desc edit Quotation CS
+// @route PUT /purchase/quotation-cs
+// @access private/edit-purchase-cs
+export const editQuotationCs = expressAsyncHandler(async (req, res) => {
+  const id = req.params.id;
+  /* const findQcs = await CsDetails.find({
+    qcs: qcsId,
+    organization: req.user.authOrganization
+  }); */
+
+  const updateQuotationCs = await QuotationCs.findOneAndUpdate(
+    { _id: id, organization: req.user.authOrganization },
+    { $set: req.body },
+    { new: true }
+  )
+
+  let item = req.body.items ? req.body.items : [];
+  //console.log(item);
+  var i;
+  for (i=0; i<item.length; i++) {
+    console.log(item[i].goodsName);
+    
+    const dataUpdate = await CsDetails.findOneAndUpdate(
+      { goodsId: item[i].goodsId, qcs: id },
+      {
+        $set: {
+          goodsName: item[i].goodsName,
+          parties: [{
+            party: item[i].party,
+            unit: item[i].unit,
+            ratePerUnit: item[i].ratePerUnit,
+            goodsQuantity: item[i].goodsQuantity,
+            totalPrice: item[i].totalPrice
+          }]
+        }
+      },
+      { new: true }
+
+    );
+
+
+    //console.log(item[i].goodsId);
+    //console.log(dataUpdate);
+
+  }
+
+  if (updateQuotationCs) {
+    res.status(200).json({
+      success: true,
+      msg: 'QuotationCs updated successfully!',
+      data: updateQuotationCs
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: 'QuotationCs not found!',
+      data: [],
+    });
+  }
+})
+
+
+// @desc edit Quotation CS
+// @route PUT /purchase/quotation-cs
+// @access private/edit-purchase-cs
+export const editQuotationCs = expressAsyncHandler(async (req, res) => {
+  const qcsId = req.params.id;
+
+  const {
+    authUser,
+    authName,
+    authEmail,
+    authOrganization,
+    authOrganizationName,
+  } = req.user;
+
+  await CsDetails.deleteMany({
+    qcs: qcsId
+  });
+
+  try {
+    const updateQuotationCs = await QuotationCs.findOneAndUpdate(
+      { _id: qcsId, organization: req.user.authOrganization },
+      { $set: req.body },
+      { new: true }
+    );
+    const inputData = [];
+    let item = req.body.items ? req.body.items : [];
+
+    for (var i = 0; i < item.length; i++) {
+      const party = {
+        party: item[i].party,
+        unit: item[i].unit,
+        ratePerUnit: item[i].ratePerUnit,
+        goodsQuantity: item[i].goodsQuantity,
+        totalPrice: item[i].totalPrice
+      };
+
+      //console.log(item[i].goodsId);
+
+      if (inputData.includes(item[i].goodsId)) {
+        const upParties = await CsDetails.findOneAndUpdate(
+          {
+            goodsId: item[i].goodsId,
+            qcs: updateQuotationCs._id,
+          },
+          {
+            $push: {
+              parties: [party],
+            },
+          }
+        );
+      } else {
+        inputData.push(item[i].goodsId);
+
+        const csItems = await CsDetails.create({
+          qcs: updateQuotationCs._id,
+          goodsId: item[i].goodsId,
+          goodsName: item[i].goodsName,
+          parties: [party],
+        });
+      }
+    }
+
+    const log = new Log({
+      type: 'Quotation Cs',
+      color: 'success',
+      msg: `Quotation CS: <b>${updateQuotationCs.title}</b> updated successfully! id: ${updateQuotationCs._id}`,
+      user: authUser,
+      organization: authOrganization,
+    });
+    await log.save();
+
+    res.status(201).json({
+      success: true,
+      msg: 'CS updated successfully!',
+      data: []
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      msg: 'Please try again',
+      data: [],
+    });
+  }
+})
+
