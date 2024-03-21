@@ -9,6 +9,7 @@ import errorHandler from "./helpers/error-handler.js";
 import productRoutes from './routes/product.route.js';
 import categoryRoutes from './routes/category.route.js';
 import userRoutes from './routes/user.route.js';
+import orderRoutes from './routes/order.route.js';
 
 
 
@@ -45,6 +46,7 @@ app.get(api+'/', (req, res) => {
 app.use(`${api}/user`, userRoutes);
 app.use(`${api}/product`, productRoutes);
 app.use(`${api}/category`, categoryRoutes);
+app.use(`${api}/order`, orderRoutes);
 
 app.listen(5000, () => {
     //console.log(api);

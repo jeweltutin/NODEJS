@@ -9,8 +9,8 @@ router
     .post(createProduct);
 
 router.route('/count').get(totalProduct);
-router.route('/featured-count').get(totalFeaturedProduct);
-//router.route('/featured-count/:show').get(totalFeaturedProduct);  // For params 
+router.route('/featured-count').get(totalFeaturedProduct);    // req.query
+//router.route('/featured-count/:show').get(totalFeaturedProduct);  // For req.params 
 
 
 router

@@ -26,6 +26,7 @@ import Product from "../models/Product.model.js";
 
 
 // Get products with filtering if needed
+// http://localhost:5000/api/v1/product?categories=65debae75072895facd27cf3,65ddd5da63f312e9acc72044
 const getProducts = async (req, res) => {
     let filter = {};
     if (req.query.categories) {

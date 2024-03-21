@@ -32,7 +32,23 @@
             "totalPrice": 500
         }
     ]
-   
+}
+
+//Order Example
+{
+    "orderItems" : [
+        {
+            "quantity": 1,
+            "product": "65e0365c523b524eeeb8f5c1"
+        }
+    ],
+    "shippingAddress1" : "Flowers Street , 45",
+    "shippingAddress2" : "1-B",
+    "city": "Prague",
+    "zip": "00000",
+    "country": "Bangladesh",
+    "phone": "01708464189",
+    "user": "65e5977c618b307396159563"
 }
 
 

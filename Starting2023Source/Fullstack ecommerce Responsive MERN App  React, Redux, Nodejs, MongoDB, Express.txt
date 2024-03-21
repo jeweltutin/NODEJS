@@ -1,5 +1,16 @@
+// Build Complete E-Commerce Web API expressjs
+https://www.youtube.com/playlist?list=PLzb46hGUzitBp584kLyn6l3i6yC-rXlmN  // Full completed (March 2024)
+
 https://www.youtube.com/watch?v=JFCQLhSMjtM&ab_channel=DynamicCodingwithAmit
 
 // Full Stack E-commerce Website Using MERN || (React, NodeJS, ExpressJS, MongoDB)
 https://www.youtube.com/watch?v=M21inYOUrlk&list=PL_pNGipveQXyVkwh4SBTyKFQBQwQqUkgQ&index=1&ab_channel=HarshPathak
 https://github.com/harsh17112000/E-commerceapp
+
+
+// Amazon Clone Shopping Cart For Beginners By Next.js 13.4 [2023]
+https://www.youtube.com/watch?v=RDxWB9Dh0tg&ab_channel=CodingwithBasir
+
+
+https://blog.logrocket.com/building-a-next-js-shopping-cart-app/
+https://medium.com/@pether.maciejewski/easy-stripe-checkout-with-use-shopping-cart-and-next-js-14-8895c9865437
