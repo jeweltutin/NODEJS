@@ -1,5 +1,6 @@
 import Order from "../models/Order.model.js";
 import OrderItem from "../models/OrderItem.model.js";
+import Product from "../models/Product.model.js";
 
 
 const createOrder = async (req, res) => {
@@ -79,7 +80,21 @@ const editOrder = async (req, res) => {
     let inputOrderItems = req.body.orderItems ? req.body.orderItems : [];
     const orderedItemsId = await Order.findById(orderId).select("orderItems");
     //console.log(orderedItemsId.orderItems.length);
-    //console.log(orderedItemsId.orderItems);
+    //console.log(orderedItemsId.orderItems[0]);
+
+    //const productPrice = await Order.findById(orderId).populate({ path: 'orderItems', populate: 'product' });
+
+    var sum = 0;
+    for(var i=0; i<inputOrderItems.length; i++){
+       const productPrice = await Product.findById(inputOrderItems[i].product).select('price');
+       var totalPrice = productPrice.price * (inputOrderItems[i].quantity);
+        //console.log(productPrice.price * inputOrderItems[i].quantity);
+        sum += totalPrice; 
+        console.log(totalPrice);
+        //console.log(typeof productPrice.price);    
+    }
+    //res.json(sum);
+
     if (orderedItemsId.orderItems.length > 0) {
         const deletedItems = await OrderItem.deleteMany({ _id: { $in: orderedItemsId.orderItems } });
         /* res.status(200).json({
@@ -128,6 +143,7 @@ const editOrder = async (req, res) => {
                     status: req.body.status,
                     zip: req.body.zip,
                     city: req.body.city,
+                    totalPrice: sum,
                     country: req.body.country,
                     shippingAddress1: req.body.shippingAddress1,
                     shippingAddress2: req.body.shippingAddress2
@@ -151,4 +167,44 @@ const editOrder = async (req, res) => {
     }
 }
 
-export { createOrder, getOrders, getOrder, editOrderStatus, editOrder }
+/* const deleteOrder = async (req, res) => {
+    const orderDeleted = await Order.findByIdAndDelete({
+        _id: req.params.id
+    });
+
+    if (orderDeleted) {
+        await OrderItem.deleteMany({
+            _id: { $in: orderDeleted.orderItems }
+        })
+        res.status(200).json({
+            success: true,
+            msg: 'Order Deleted successfully!',
+            data: orderDeleted,
+        });
+    } else {
+        res.status(400).json({
+            success: false,
+            msg: 'Please Try again later!',
+            data: [],
+        });
+    }
+}
+ */
+
+const deleteOrder = async (req, res) => {
+    Order.findByIdAndRemove(req.params.id).then(async order => {
+        if (order) {
+            await order.orderItems.map(async orderItem => {
+                await OrderItem.findByIdAndRemove(orderItem)
+            })
+            return res.status(200).json({ success: true, message: 'the order is deleted!' })
+        } else {
+            return res.status(404).json({ success: false, message: "order not found!" })
+        }
+    }).catch(err => {
+        return res.status(500).json({ success: false, error: err })
+    })
+}
+
+
+export { createOrder, getOrders, getOrder, editOrderStatus, editOrder, deleteOrder }

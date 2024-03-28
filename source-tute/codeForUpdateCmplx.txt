@@ -1,3 +1,16 @@
+// How to Add, Remove and Update items in a MongoDB Array using Mongoose
+https://devpress.csdn.net/mongodb/62f4f9fac6770329307fad7b.html
+// How to push or pull item from an array in Mongoose
+https://attacomsian.com/blog/mongoose-push-pull-items-from-array
+
+https://stackoverflow.com/questions/64477224/mongoose-push-object-id-to-array-of-objectids
+https://stackoverflow.com/questions/57105883/how-to-delete-multiple-ids-in-mongoose
+
+https://www.geeksforgeeks.org/mongoose-document-model-bulkwrite-api/
+https://stackoverflow.com/questions/39988848/trying-to-do-a-bulk-upsert-with-mongoose-whats-the-cleanest-way-to-do-this
+https://www.mongodb.com/docs/drivers/node/current/usage-examples/bulkWrite/
+
+
 {
     "requisitionNo": "Req:10 Up check",
     "description": "Pen is needed for all update",
