@@ -1,1 +1,5 @@
 https://www.youtube.com/watch?v=mSQwg_H2T7c&ab_channel=ProgrammingExperience
+
+// Many-to-Many relationship in MongoDB . Nodejs | Express | Mongoose
+https://dev.to/nehalahmadkhan/many-to-many-relationship-in-mongodb-nodejs-express-mongoose-4djm
+https://www.bezkoder.com/mongodb-many-to-many-mongoose/#google_vignette
