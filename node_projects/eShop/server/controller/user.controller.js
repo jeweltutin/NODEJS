@@ -18,7 +18,7 @@ const authUser = async (req, res) => {
                 isAdmin: user.isAdmin
             },
             secret,
-            { expiresIn: '7d' }
+            { expiresIn: '20d' }
         )
         res.status(200).send({
             user: user.email , 

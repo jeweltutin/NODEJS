@@ -47,6 +47,16 @@ const getCategories = async (req, res) => {
     }
 }
 
+const getCategoriesWithProducts = async (req, res) => {
+    const categoryList = await Category.find().populate('products', 'name price countInStock');
+    //console.log(categoryList);
+    if (!categoryList) {
+        res.status(500).json({ success: false })
+    } else {
+        res.status(200).send(categoryList);
+    }
+}
+
 const getCategory = async (req, res) => {
     const category = await Category.findById(req.params.id);
 
@@ -92,4 +102,4 @@ const deleteCategory = async (req, res) => {
     })
 }
 
-export { getCategories, getCategory, createCategory, updateCategory, deleteCategory }
+export { getCategories, getCategory, getCategoriesWithProducts, createCategory, updateCategory, deleteCategory }
