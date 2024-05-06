@@ -1,2 +1,5 @@
 // mongodb/mongoose findMany - find all documents with IDs listed in array
 https://stackoverflow.com/questions/8303900/mongodb-mongoose-findmany-find-all-documents-with-ids-listed-in-array
+
+//get number of product in each category with mongodb aggregate
+https://dev.to/ma2web/get-number-of-product-in-each-category-with-mongodb-aggregate-1jc3

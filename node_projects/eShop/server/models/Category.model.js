@@ -20,6 +20,9 @@ const categorySchema = mongoose.Schema({
     ]
 })
 
+categorySchema.virtual('productsCount').get(function () {
+    return this.products.length;
+  });
 
 /* categorySchema.virtual('id').get(function () {
     return this._id.toHexString();
