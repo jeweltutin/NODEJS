@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/33695269/how-to-define-varying-attributes-for-a-product-system-in-mongoose-node-js

@@ -1,0 +1,446 @@
+//Source: https://www.youtube.com/watch?v=SUZKhBvxW5c&list=PLRAV69dS1uWQ6CZCehxKy0rjkqhQ2Z88t&ab_channel=HiteshChoudhary  // Completed
+https://www.mongodb.com/docs/manual/core/aggregation-pipeline/
+https://www.w3schools.com/mongodb/mongodb_aggregations_out.php
+
+https://masteringjs.io/tutorials/mongoose/aggregate
+https://dev.to/petrussola/mongoose-and-how-to-group-by-count-5gcm
+https://www.mongodb.com/community/forums/t/according-to-this-schema-how-to-count-product-category-in-each-category-for-ex-electronics-2-accessories-10-help-plz/185303
+
+
+01. How many users are active?  // All examples inplemented in expmongo project
+[
+  {
+    $match: {
+      isActive: true
+    }
+  },
+  {
+    $count: 'activeUsers'
+  }
+]
+
+02.What is the average age of all users?
+[
+  {
+    $group: {
+      _id: "$gender",   // _id: null
+      averageAge: {
+        $avg: "$age"
+      }
+    }
+  },
+]
+
+49. Find the total number of males % females among users
+[
+  {
+    $group: {
+      _id: "$gender",   // _id: null // if use _id: null here will count db documents
+      count: {
+      $sum: 1
+    }
+    }
+  },
+]
+
+50. Group by fav fruits and count how many users 
+[
+  {
+    $group: {
+      _id: "$favoriteFruit",
+      count: {
+        $sum: 1
+      }      
+    }
+  },
+]
+
+03. List the top 5 most common favorite fruits among the users.
+[
+  {
+    $group: {
+      _id: "$favoriteFruit",
+      count: {
+        $sum: 1
+      }      
+    }
+  },
+  {
+    $sort: {
+      count: -1
+    }
+  },
+  {
+    $limit: 2
+  }
+]
+
+04. Which country has the highest number of registered users?
+[
+  {
+    $group: {
+      _id: "$company.location.country",
+      userCount: {
+        $sum: 1
+      }
+    }
+  },
+  {
+    $sort: {
+      userCount: -1
+    }
+  },
+  {
+    $limit: 5
+  }
+]
+
+05. List all unique eye colors present in the collection
+[
+  {
+    $group: {
+      _id: "$eyeColor"    
+    }
+  }
+]
+
+06. What is the average number of tags per user?
+[
+  {
+    $unwind: "$tags"
+  },
+  {
+    $group: {
+      _id: "$_id",
+      numberOfTags: {
+        $sum: 1
+      }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      averageNumberOfTags: {
+        $avg: "$numberOfTags"
+      } 
+    }
+  }
+]
+
+*** Way 01
+[
+  {
+    $addFields: {
+      numberOfTags: {
+        $size: "$tags"
+      }
+    }
+  }  
+]
+
+*** Way 02
+[
+  {
+    $addFields: {
+      numberOfTags: {
+        $size: {
+          $ifNull: ["$tags", []]
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      "index": 1,
+      "name": 1,
+      "numberOfTags": 1,
+      "age": 1      
+    }
+  }
+]
+
+*** Way 03
+[
+  {
+    $project: {
+      "index": 1,
+      "name": 1,
+       numberOfTags: {
+        $size: {
+          $ifNull: ["$tags", []]
+        }
+      },
+      "age": 1
+    }
+  }
+]
+
+*** Way 03 with average
+[
+  {
+    $project: {
+      "index": 1,
+      "name": 1,
+       numberOfTags: {
+        $size: {
+          $ifNull: ["$tags", []]
+        }
+      },
+      "age": 1
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      averageNumberOfTags: {
+        $avg: "$numberOfTags"
+      } 
+    }
+  }
+]
+
+51. Select the users who has tags 'enim'?
+[
+  {
+    $match: {
+      tags: "enim"
+    }
+  }
+]
+
+07. How many users have 'enim' as one of their tags?
+[
+  {
+    $match: {
+      tags: "enim"
+    }
+  },
+  {
+     $count: 'userWithEnimTag'
+  }
+]
+
+08. What are the names and age of users inactive and 'velit' as a tag?
+[
+  {
+    $match: {
+      isActive: false,
+      tags: "velit",
+      //age: 20
+    }
+  },
+  {
+    $project: {
+      name: 1,
+      age: 1,
+      tags: 1
+    }
+  }
+]
+
+09. How many users have a phone number starting with '+1 (940' ?
+[
+  {
+    $match: {
+      isActive: true,
+      "company.phone": /^\+1 \(940/
+      //"company.phone": /^\+1 \(940\)/
+    }
+  },
+  {
+    $count: 'usersWith MatchingPhnNumber'
+  }  
+]
+
+10. Who has registered the most recently?
+[
+  {
+    $sort: {
+      registered: -1
+    }
+  },
+  {
+    $limit: 7
+  },
+  {
+    $project: {
+      index: 1,
+      name: 1,
+      age: 1,
+      registered: 1,
+      "company.title": 1,
+      "company.phone": 1,
+      "company.location.country": 1,
+      gender: 1,
+    }
+  }
+]
+
+11. Categorize users by their favourite fruit.
+[
+  {
+    $group: {
+      _id: "$favoriteFruit",
+      employers: {
+        $push: "$name"
+      }
+    }
+  },
+  {
+    $sort: {
+      employers: 1
+    }
+  }
+]
+
+12. How many users have 'ad' as the second tag in their list of tags?
+[
+  {
+    $match: {
+      "tags.1": "ad"
+    }
+  },
+  {
+    $count: 'secondTagAd'
+  }
+]
+
+13. Find the users who have both 'enim' and 'id' as their tags.
+{
+  tags: {
+    $all: ["enim", "id"]
+  }
+}
+
+14. List all companies located in the USA with their corresponding user count.
+[
+  {
+    $match: {
+			"company.location.country": "USA"
+    }
+  },
+  {
+    $group: {
+      _id: "$company.title",
+      userCount: {
+        $sum: 1
+      }
+      
+    }
+  }
+]
+
+15. Join books with Authors basic lookup
+[
+  {
+    $lookup: {
+      from: "authors",
+      localField: "author_id",
+      foreignField: "_id",
+      as: "authorDetails"
+    }
+  }
+]
+
+52. Re arrangre the output: yes... the doc of 4.4 version. But not exists in 4.2,
+[
+  {
+    $lookup: {
+      from: "authors",
+      localField: "author_id",
+      foreignField: "_id",
+      as: "authorDetails"
+    }
+  },
+  {
+    $addFields: {
+      authorDetails: {
+        $first: "$authorDetails"
+      }
+    }
+  }
+]
+
+53. Same output but diff way: better one
+[
+  {
+    $lookup: {
+      from: "authors",
+      localField: "author_id",
+      foreignField: "_id",
+      as: "authorDetails"
+    }
+  },
+  {
+    $addFields: {
+      authorDetails: {
+        $arrayElemAt: ["$authorDetails", 0]
+      }
+    }
+  }
+]
+
+54.  This pipeline example contains two stages and returns the total order quantity of medium size pizzas grouped by pizza name
+[
+  {
+    $match: {
+      size: "medium"
+    }
+  },
+  {
+    $group: {
+      _id: "$name",
+      totalQuantity: {
+        $sum: "$quantity"
+      }
+    }
+  }
+]
+
+The $match stage:
+*Filters the pizza order documents to pizzas with a size of medium.
+*Passes the remaining documents to the $group stage.
+
+The $group stage:
+*Groups the remaining documents by pizza name.
+*Uses $sum to calculate the total order quantity for each pizza name. 
+ The total is stored in the totalQuantity field returned by the aggregation pipeline.
+ 
+55. The following example calculates the total pizza order value and average order quantity between two dates
+ [
+   // Stage 1: Filter pizza order documents by date range
+   {
+      $match:
+      {
+         "date": { $gte: new ISODate( "2020-01-30" ), $lt: new ISODate( "2022-01-30" ) }
+      }
+   },
+   // Stage 2: Group remaining documents by date and calculate results
+   {
+      $group:
+      {
+         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+         totalOrderValue: { $sum: { $multiply: [ "$price", "$quantity" ] } },
+         averageOrderQuantity: { $avg: "$quantity" }
+      }
+   },
+   // Stage 3: Sort documents by totalOrderValue in descending order
+   {
+      $sort: { totalOrderValue: -1 }
+   }
+ ] 
+
+The $match stage:
+*Filters the pizza order documents to those in a date range specified using $gte and $lt.
+*Passes the remaining documents to the $group stage.
+
+The $group stage:
+*Groups the documents by date using $dateToString.
+*For each group, calculates:
+*Total order value using $sum and $multiply.
+*Average order quantity using $avg.
+*Passes the grouped documents to the $sort stage.
+
+The $sort stage:
+*Sorts the documents by the total order value for each group in descending order (-1).
+*Returns the sorted documents.

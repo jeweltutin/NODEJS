@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install
