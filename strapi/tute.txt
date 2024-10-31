@@ -1,0 +1,10 @@
+https://strapi.io/blog/a-beginners-guide-to-authentication-and-authorization-in-strapi
+
+
+//Strapi Tutorial For Beginners
+https://www.youtube.com/playlist?list=PLu0W_9lII9ajKKSG5aROCiw9iro5vK-gE
+
+
+//headless_cms_and_ecommerce_platform_for_a_nextjs
+https://nextjstemplates.com/blog/headless-cms-nextjs
+https://www.reddit.com/r/nextjs/comments/1506w5i/headless_cms_and_ecommerce_platform_for_a_nextjs/

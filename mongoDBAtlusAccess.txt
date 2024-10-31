@@ -1,0 +1,21 @@
+// DB user Info
+username: jeweltutin
+MongodbPass: m0tLp7QWvxdq4HgX
+
+
+https://cloud.mongodb.com/
+email : jeweltutin@gmail.com
+pass: no**3
+
+
+
+// "Allow access from anywhere" MongoDB Atlas
+https://stackoverflow.com/questions/66035947/allow-access-from-anywhere-mongodb-atlas
+
+IMPORTANT: Adding the CIDR 0.0.0.0/0 allows access from anywhere. Ensure that strong credentials (username and password) are used for all database users when allowing access from anywhere.
+
+// locally installed mongoDB
+C:\Program Files\MongoDB\Server\4.2\
+F:\MongoDB\Server\4.2\
+
+

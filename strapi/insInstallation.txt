@@ -1,0 +1,53 @@
+icrosoft Windows [Version 10.0.19045.4894]
+(c) Microsoft Corporation. All rights reserved.
+
+// I have installed with yarn
+npx create-strapi-app@latest
+
+E:\strapi>yarn create strapi
+yarn create v1.22.22
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+
+success Installed "create-strapi@5.0.0" with binaries:
+      - create-strapi
+
+ Strapi   v5.0.0 🚀 Let's create your new project
+
+? What is the name of your project? grocery-admin
+? What is the name of your project? grocery-admin
+
+We can't find any auth credentials in your Strapi config.
+
+Create a free account on Strapi Cloud and benefit from:
+
+- ✦ Blazing-fast ✦ deployment for your projects
+- ✦ Exclusive ✦ access to resources to make your project successful
+- An ✦ Awesome ✦ community and full enjoyment of Strapi's ecosystem
+
+Start your 14-day free trial now!
+
+
+? Please log in or sign up.
+? Please log in or sign up. Skip
+? Do you want to use the default database (sqlite) ? (Y/n) n
+? Do you want to use the default database (sqlite) ? No
+? Choose your default database client
+? Choose your default database client mysql
+? Database name: grocery-store
+? Database name: grocery-store
+? Host: 127.0.0.11)
+? Port: (3306)
+? Port: 3306
+? Enable SSL connection: (y/N) n
+? Enable SSL connection: No
+? Start with an example structure & data? (y/N)
+? Start with an example structure & data? No
+? Start with Typescript? (Y/n) n
+? Start with Typescript? Yes
+? Install dependencies with yarn? (Y/n) y
+? Install dependencies with yarn? Yes
+? Initialize a git repository? (Y/n) n
+? Initialize a git repository? No

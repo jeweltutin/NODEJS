@@ -1,0 +1,22 @@
+ Your application was created!
+          Available commands in your project:
+
+          Start Strapi in watch mode. (Changes in Strapi project files will trigger a server restart)
+          yarn run develop
+
+          Start Strapi without watch mode.
+          yarn run start
+
+          Build Strapi admin panel.
+          yarn run build
+
+          Deploy Strapi project.
+          yarn run deploy
+
+          Display all available commands.
+          yarn run strapi
+
+          To get started run
+
+          cd E:\strapi\grocery-admin
+          yarn run develop
