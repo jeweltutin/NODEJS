@@ -470,6 +470,10 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     mobile: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    about: Schema.Attribute.Text;
+    profileImageOff: Schema.Attribute.Media<'images'>;
+    profileImage: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -481,6 +485,36 @@ export interface PluginUsersPermissionsUser
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
+  collectionName: 'about_pages';
+  info: {
+    singularName: 'about-page';
+    pluralName: 'about-pages';
+    displayName: 'About Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    banner: Schema.Attribute.Media<'images' | 'files'>;
+    body: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-page.about-page'
     >;
   };
 }
@@ -650,6 +684,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<50>;
     colors: Schema.Attribute.Relation<'oneToMany', 'api::color.color'>;
     brand: Schema.Attribute.Relation<'oneToOne', 'api::brand.brand'>;
+    details: Schema.Attribute.RichText;
+    warranty: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -717,6 +753,7 @@ export interface ApiUserCartUserCart extends Struct.CollectionTypeSchema {
     userId: Schema.Attribute.Integer;
     productId: Schema.Attribute.Integer;
     color: Schema.Attribute.String;
+    stock: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1107,6 +1144,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::brand.brand': ApiBrandBrand;
       'api::category.category': ApiCategoryCategory;
       'api::color.color': ApiColorColor;

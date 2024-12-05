@@ -67,6 +67,23 @@
     },
     "mobile": {
       "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "about": {
+      "type": "text"
+    },
+    "profileImageOff": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "profileImage": {
+      "type": "string"
     }
   }
 }

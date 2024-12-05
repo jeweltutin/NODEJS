@@ -19,3 +19,8 @@ C:\Program Files\MongoDB\Server\4.2\
 F:\MongoDB\Server\4.2\
 
 
+//Connect to JewelsCluster
+username : jeweltutin
+pass : uuLHL2seLi0utxcm
+
+

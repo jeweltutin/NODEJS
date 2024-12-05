@@ -8,3 +8,7 @@ https://www.youtube.com/playlist?list=PLu0W_9lII9ajKKSG5aROCiw9iro5vK-gE
 //headless_cms_and_ecommerce_platform_for_a_nextjs
 https://nextjstemplates.com/blog/headless-cms-nextjs
 https://www.reddit.com/r/nextjs/comments/1506w5i/headless_cms_and_ecommerce_platform_for_a_nextjs/
+
+
+// How to upload an image in strapi to the collection type fields - strapi v4
+https://www.youtube.com/watch?v=EXTWTqBekAc&ab_channel=AbdulrehmanTechs

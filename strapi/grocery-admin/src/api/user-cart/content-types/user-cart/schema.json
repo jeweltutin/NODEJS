@@ -36,6 +36,9 @@
     },
     "color": {
       "type": "string"
+    },
+    "stock": {
+      "type": "integer"
     }
   }
 }
