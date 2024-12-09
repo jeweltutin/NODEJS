@@ -27,9 +27,7 @@ export const registerUser = async (req, res) => {
 
     if (user) {
       isAdmin ? createJWT(res, user._id) : null;
-
       user.password = undefined;
-
       res.status(201).json(user);
     } else {
       return res
@@ -132,8 +130,8 @@ export const updateUserProfile = async (req, res) => {
       isAdmin && userId === _id
         ? userId
         : isAdmin && userId !== _id
-        ? _id
-        : userId;
+          ? _id
+          : userId;
 
     const user = await User.findById(id);
 
@@ -226,9 +224,8 @@ export const activateUserProfile = async (req, res) => {
 
       res.status(201).json({
         status: true,
-        message: `User account has been ${
-          user?.isActive ? "activated" : "disabled"
-        }`,
+        message: `User account has been ${user?.isActive ? "activated" : "disabled"
+          }`,
       });
     } else {
       res.status(404).json({ status: false, message: "User not found" });

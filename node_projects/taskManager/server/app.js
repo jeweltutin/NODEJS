@@ -13,13 +13,13 @@ dotenv.config();
 //console.log("MongoDB URI:", process.env.MONGODB_URI);
 dbConnect();
 
-/* app.use(
+app.use(
     cors({
         origin: ["http://localhost:3000", "http://localhost:3001"],
         methods: ["GET", "POST", "DELETE", "PUT"],
         credentials: true,
     })
-); */
+);
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
