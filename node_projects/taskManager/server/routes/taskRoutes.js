@@ -1,11 +1,11 @@
 import express from "express";
 import { isAdminRoute, protectRoute } from "../middlewares/auth.js";
-import { createSubTask, dashboardStatistics, deleteRestoreTask, duplicateTask, getTask, getTasks, postTaskActivity, trashTask, updateTask } from "../controller/taskController.js";
+import { createSubTask, createTask, dashboardStatistics, deleteRestoreTask, duplicateTask, getTask, getTasks, postTaskActivity, trashTask, updateTask } from "../controller/taskController.js";
 
 
 const router = express.Router();
 
-router.post("/create", protectRoute, isAdminRoute, createSubTask);
+router.post("/create", protectRoute, isAdminRoute, createTask);
 router.post("/duplicate/:id", protectRoute, isAdminRoute, duplicateTask);
 router.post("/activity/:id", protectRoute, postTaskActivity);
 
