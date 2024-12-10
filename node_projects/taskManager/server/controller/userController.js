@@ -91,7 +91,24 @@ export const logoutUser = async (req, res) => {
     console.log(error);
     return res.status(400).json({ status: false, message: error.message });
   }
-};
+}; 
+
+/* export const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      //sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+	  sameSite: "lax"
+    });
+
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
+  }
+}; */
+
 
 
 export const getTeamList = async (req, res) => {
