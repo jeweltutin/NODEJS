@@ -24,6 +24,8 @@ export const registerUser = async (req, res) => {
       role,
       title,
     });
+	
+	console.log(user);
 
     if (user) {
       isAdmin ? createJWT(res, user._id) : null;
@@ -122,6 +124,17 @@ export const getTeamList = async (req, res) => {
   }
 };
 
+export const getActiveTeamList = async (req, res) => {
+  try {
+    const users = await User.find({ isActive: true }).select("name isActive");
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ status: false, message: error.message });
+  }
+};
+
 export const getNotificationsList = async (req, res) => {
   try {
     const { userId } = req.user;
@@ -142,6 +155,8 @@ export const updateUserProfile = async (req, res) => {
   try {
     const { userId, isAdmin } = req.user;
     const { _id } = req.body;
+	
+	console.log("Admin:", isAdmin, "UserId: ", userId);
 
     const id =
       isAdmin && userId === _id

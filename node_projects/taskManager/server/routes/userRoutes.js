@@ -1,6 +1,6 @@
 import express from "express";
 import { isAdminRoute, protectRoute } from "../middlewares/auth.js";
-import { activateUserProfile, changeUserPassword, deleteUserProfile, getNotificationsList, getTeamList, loginUser, logoutUser, markNotificationRead, registerUser, updateUserProfile } from "../controller/userController.js";
+import { activateUserProfile, changeUserPassword, deleteUserProfile, getNotificationsList, getTeamList, getActiveTeamList, loginUser, logoutUser, markNotificationRead, registerUser, updateUserProfile } from "../controller/userController.js";
 
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
 router.get("/get-team", protectRoute, isAdminRoute, getTeamList);
+router.get("/select-team", protectRoute, isAdminRoute, getActiveTeamList);
 router.get("/notifications", protectRoute, getNotificationsList);
 
 router.put("/profile", protectRoute, updateUserProfile);
@@ -23,3 +24,7 @@ router
 
 
 export default router; 
+
+
+
+//http://localhost:8800/api/user/select-team

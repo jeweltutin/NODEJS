@@ -28,7 +28,8 @@ export const createTask = async (req, res) => {
     const task = await Task.create({
       title,
       team,
-      stage: stage.toLowerCase(),
+      //stage: stage.toLowerCase(),
+	  stage,
       date,
       priority: priority.toLowerCase(),
       assets,
@@ -199,12 +200,17 @@ export const dashboardStatistics = async (req, res) => {
 
 export const getTasks = async (req, res) => {
   try {
-    const { stage, isTrashed } = req.query;
+    const { stage, isTrashed, userId, role } = req.query;
 
     let query = { isTrashed: isTrashed ? true : false };
 
     if (stage) {
       query.stage = stage;
+    }
+	
+	// If the user is not an admin, filter tasks based on the user's ID being part of the 'team' array
+    if (role !== 'admin') {
+      query.team = userId; // Check if userId is in the team array
     }
 
     let queryResult = Task.find(query)
