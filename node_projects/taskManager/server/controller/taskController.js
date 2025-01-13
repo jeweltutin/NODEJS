@@ -2,11 +2,13 @@ import Notice from "../models/notification.js";
 import Task from "../models/task.js";
 import User from "../models/user.js";
 
-export const createTask = async (req, res) => {
+/*export const createTask = async (req, res) => {
   try {
     const { userId } = req.user;
+	 // Get the uploaded files (assets)
+    const assets = req.files.map(file => file.filename);
 
-    const { title, team, stage, date, priority, assets } = req.body;
+    const { title, team, stage, date, priority } = req.body;
 
     let text = "New task has been assigned to you";
     if (team?.length > 1) {
@@ -24,10 +26,12 @@ export const createTask = async (req, res) => {
       activity: text,
       by: userId,
     };
+	
+	
 
     const task = await Task.create({
       title,
-      team,
+      team: JSON.parse(team), // Parse team array
       //stage: stage.toLowerCase(),
 	  stage,
       date,
@@ -49,6 +53,60 @@ export const createTask = async (req, res) => {
     console.log(error);
     return res.status(400).json({ status: false, message: error.message });
   }
+};*/
+
+
+export const createTask = async (req, res) => {
+    try {
+        const { userId } = req.user;
+
+        // Get the uploaded files (assets)
+        const assets = req.files.map((file) => file.filename);
+
+        const { title, team, stage, date, priority } = req.body;
+        const parsedTeam = Array.isArray(team) ? team : JSON.parse(team);
+
+        let text = "New task has been assigned to you";
+        if (parsedTeam?.length > 1) {
+            text = text + ` and ${parsedTeam?.length - 1} others.`;
+        }
+
+        text =
+            text +
+            ` The task priority is set to ${priority} priority, so check and act accordingly. The task date is ${new Date(
+                date
+            ).toDateString()}. Thank you!!!`;
+
+        const activity = {
+            type: "assigned",
+            activity: text,
+            by: userId,
+        };
+
+        const task = await Task.create({
+            title,
+            team: parsedTeam,
+            stage,
+            date,
+            priority: priority.toLowerCase(),
+            assets,
+            activities: activity,
+        });
+
+        // Log parsed data for debugging
+        console.log("Notice data:", { team: parsedTeam, text, taskId: task._id });
+
+        await Notice.create({
+            team: parsedTeam,
+            text,
+            task: task._id,
+        });
+
+        res.status(200).json({ status: true, task, message: "Task created successfully." });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ status: false, message: error.message });
+    }
 };
 
 export const duplicateTask = async (req, res) => {
@@ -282,11 +340,19 @@ export const createSubTask = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
-
-export const updateTask = async (req, res) => {
+/*export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, date, team, stage, priority, assets } = req.body;
+    const { title, date, team, stage, priority } = req.body;
+        const files = req.files;
+		
+		
+
+        console.log("Task ID:", id);
+        console.log("Request Body:", req.body);
+        console.log("Uploaded Files:", files);
+	
+	console.log("From body:", title);
 
     const task = await Task.findById(id);
 
@@ -301,12 +367,54 @@ export const updateTask = async (req, res) => {
 
     res
       .status(200)
-      .json({ status: true, message: "Task duplicated successfully." });
+      .json({ status: true, message: "Task updated successfully." });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ status: false, message: error.message });
   }
+};*/
+
+export const updateTask = async (req, res) => {
+    try {
+        const { _id, title, date, team, stage, priority } = req.body;
+
+        if (!_id) {
+            return res.status(400).json({ message: "Task ID (_id) is required" });
+        }
+
+        // Parse team if it's a JSON string
+        const parsedTeam = typeof team === "string" ? JSON.parse(team) : team;
+
+        // Extract file paths from req.files
+        const uploadedFiles = req.files ? req.files.map(file => file.path) : [];
+
+        // Find the task and update
+        const updatedTask = await Task.findByIdAndUpdate(
+            _id,
+            {
+                title,
+                date,
+                team: parsedTeam,
+                stage: stage.toLowerCase(),
+                priority: priority.toLowerCase(),
+                $push: { assets: { $each: uploadedFiles } }, // Append new assets
+            },
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedTask) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        res.status(200).json({ message: "Task updated successfully", task: updatedTask });
+    } catch (error) {
+        console.error("Error updating task:", error);
+        res.status(500).json({ message: "Internal server error", error });
+    }
 };
+
+
+
 
 export const trashTask = async (req, res) => {
   try {

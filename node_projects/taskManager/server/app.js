@@ -6,12 +6,22 @@ import dotenv from 'dotenv';
 import dbConnect from "./utils/dbConnect.js";
 import { errorHandler, routeNotFound } from "./middlewares/errorHandler.js";
 import routes from "./routes/index.js";
+//import path from "path";
 
 const app = express();
 dotenv.config();
 
 //console.log("MongoDB URI:", process.env.MONGODB_URI);
 dbConnect();
+
+// Middleware to handle static file serving
+//const path = require("path");
+//app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use('/uploads', express.static('uploads'));
+
+// Other routes and middleware...
+
 
 app.use(
     cors({
