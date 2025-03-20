@@ -1,21 +1,21 @@
 import { expressjwt } from "express-jwt";
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.secret;
 function authJwt() {
-    //const secret = process.env.secret;
+    const secret = process.env.secret;
     const api = process.env.API_URL;
     return expressjwt({
         secret,
         algorithms: ['HS256'],
     }).unless({
         path: [
+			`${api}`,
             { url: `${api}/product`, methods: ['GET', 'OPTIONS'] },
-            { url: `${api}/product/:id`, methods: ['GET', 'OPTIONS'] },
-            { url: `${api}/category`, methods: ['GET', 'OPTIONS'] },
-            { url: `${api}/category/:id`, methods: ['GET', 'OPTIONS'] },
             `${api}/user/login`,
+            //'/api/v1/register'
             `${api}/register`,
             `${api}/product/featured-count`,
+			{ url: `${api}/category`, methods: ['GET', 'OPTIONS'] },
         ]
     })
 }

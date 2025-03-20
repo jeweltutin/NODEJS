@@ -3,6 +3,15 @@ https://strapi.io/blog/a-beginners-guide-to-authentication-and-authorization-in-
 
 //Strapi Tutorial For Beginners
 https://www.youtube.com/playlist?list=PLu0W_9lII9ajKKSG5aROCiw9iro5vK-gE
+https://www.youtube.com/watch?v=ik8ifKxT5dQ&ab_channel=Strapi
+
+https://www.youtube.com/watch?v=KbMQIgBRkAQ&list=PLu0W_9lII9ajKKSG5aROCiw9iro5vK-gE&index=6&ab_channel=CodeWithHarry
+
+//Strapi vs Sanity vs Contentful - which CMS is best?
+https://www.youtube.com/watch?v=XTi00lftmXc&ab_channel=MohammadFaisal
+
+//Cheapest way to host Strapi CMS
+https://www.youtube.com/watch?v=LVHaNfZ1rzM&ab_channel=MohammadFaisal
 
 
 //headless_cms_and_ecommerce_platform_for_a_nextjs

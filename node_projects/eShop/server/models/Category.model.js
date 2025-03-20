@@ -9,7 +9,7 @@ const categorySchema = mongoose.Schema({
     icon: {
         type: String,
     },
-    color: { 
+    color: {
         type: String,
     },
     products: [
@@ -17,12 +17,30 @@ const categorySchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product'
         }
-    ]
-})
+    ],
+    slug: {
+        type: String,
+        unique: true
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
+        required: true
+    }
+}
+    , { timestamps: true })
+
+// Auto-generate slug from name before saving
+categorySchema.pre("save", function (next) {
+    if (this.isModified("name")) {
+        this.slug = slugify(this.name, { lower: true, strict: true });
+    }
+    next();
+});
 
 categorySchema.virtual('productsCount').get(function () {
     return this.products.length;
-  });
+});
 
 /* categorySchema.virtual('id').get(function () {
     return this._id.toHexString();

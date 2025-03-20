@@ -1,4 +1,5 @@
 //const mongoose = require('mongoose');
+
 import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema({
@@ -19,13 +20,15 @@ const productSchema = mongoose.Schema({
         type: String
     }],
     brand: {
-        type: String,
-        default: ''
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Brand',
     },
-    price : {
+    mrp : {
         type: Number,
-        default:0
+        //default:0
+        required: true
     },
+    sellingPrice: Number,
     /* category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
@@ -60,6 +63,12 @@ const productSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    warrenty: String,
+    isActive: {
+        type: Boolean,
+        default: true,
+        required: true
+    }
 })
 
 productSchema.virtual('id').get(function () {

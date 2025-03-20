@@ -1,0 +1,37 @@
+$yarn add express-jwt jsonwebtoken dotenv
+
+express-jwt: Middleware to validate JWT tokens.
+jsonwebtoken: Library to create and verify tokens.
+dotenv: For managing environment variables.
+
+express-async-handler
+//express-async-handler is a middleware wrapper that simplifies error handling in asynchronous Express route handlers. 
+It helps you avoid repetitive try-catch blocks when working with async functions in Express.This eliminates the need for try-catch, as express-async-handler automatically catches errors and passes them to Express's error-handling middleware.
+https://www.npmjs.com/package/express-async-handler
+$yarn add express-async-handler
+
+
+//jsonwebtoken
+https://www.npmjs.com/package/jsonwebtoken
+$ npm install jsonwebtoken
+var jwt = require('jsonwebtoken');
+var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
+https://jwt.io/      //JSON Web Token (JWT) Debugger
+
+//bcrypt.js
+$> npm install bcryptjs
+https://www.npmjs.com/package/bcryptjs
+Why Use bcrypt?
+Hashing passwords: bcrypt generates a hash of the password, so even if someone gains access to your database, they won’t be able to read the plain text password.
+Salt and Hashing: bcrypt uses a unique salt for each password, making it more resistant to rainbow table attacks.
+Secure: It automatically handles the process of salting and hashing passwords securely.
+Adjustable cost factor: The "cost factor" is the computational complexity of the hashing, which you can adjust to ensure strong protection.
+The difference between bcrypt.compareSync() and bcrypt.compare() lies in synchrony vs asynchrony:
+
+bcrypt.compareSync():
+
+Synchronous method.
+It will block the execution until it finishes comparing the password with the hashed password.
+This can cause issues if you have multiple requests or operations running simultaneously because it will block the event loop while it processes the password comparison.
+  

@@ -686,6 +686,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     brand: Schema.Attribute.Relation<'oneToOne', 'api::brand.brand'>;
     details: Schema.Attribute.RichText;
     warranty: Schema.Attribute.String;
+    wishlists: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::wishlist.wishlist'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -765,6 +769,38 @@ export interface ApiUserCartUserCart extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-cart.user-cart'
+    >;
+  };
+}
+
+export interface ApiWishlistWishlist extends Struct.CollectionTypeSchema {
+  collectionName: 'wishlists';
+  info: {
+    singularName: 'wishlist';
+    pluralName: 'wishlists';
+    displayName: 'Wishlist';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::wishlist.wishlist'
     >;
   };
 }
@@ -1152,6 +1188,7 @@ declare module '@strapi/strapi' {
       'api::product.product': ApiProductProduct;
       'api::slider.slider': ApiSliderSlider;
       'api::user-cart.user-cart': ApiUserCartUserCart;
+      'api::wishlist.wishlist': ApiWishlistWishlist;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

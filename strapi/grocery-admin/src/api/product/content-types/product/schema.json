@@ -68,6 +68,12 @@
     },
     "warranty": {
       "type": "string"
+    },
+    "wishlists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wishlist.wishlist",
+      "mappedBy": "products"
     }
   }
 }

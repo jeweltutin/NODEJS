@@ -3,13 +3,14 @@ import express from "express";
 import dotenv from 'dotenv';
 import morgan from "morgan";
 import mongoose from "mongoose";
-import authJwt from "./helpers/jwt.js";
+//import authJwt from "./helpers/jwt.js";
 import errorHandler from "./helpers/error-handler.js";
 
 import productRoutes from './routes/product.route.js';
 import categoryRoutes from './routes/category.route.js';
 import userRoutes from './routes/user.route.js';
 import orderRoutes from './routes/order.route.js';
+import slideRoutes from './routes/slide.route.js';
 
 
 
@@ -29,7 +30,7 @@ mongoose.connect(process.env.MONGO_CONNECTION_STRING)
 })
 
 app.use(express.json());
-app.use(authJwt());
+
 app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'development') {
@@ -37,15 +38,26 @@ if (process.env.NODE_ENV === 'development') {
     //app.use(morgan('tiny'));
 }
 
+app.use("/images", express.static("public/images"));
+
 const api = process.env.API_URL;
 
-app.get(api+'/', (req, res) => {
+/* app.get(api+'/', (req, res) => {
+    res.send('API server is running!');
+}) */
+app.get('/', (req, res) => {
     res.send('API server is running!');
 })
 
-app.use(`${api}/user`, userRoutes);
+
 app.use(`${api}/product`, productRoutes);
 app.use(`${api}/category`, categoryRoutes);
+app.use(`${api}/slide`, slideRoutes);
+
+
+// Protected routes (authentication required)
+//app.use(authJwt());
+app.use(`${api}/user`, userRoutes);
 app.use(`${api}/order`, orderRoutes);
 
 app.listen(5000, () => {

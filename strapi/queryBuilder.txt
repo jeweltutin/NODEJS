@@ -1,0 +1,4 @@
+http://localhost:1337/api/products?populate=*
+http://localhost:1337/api/products?populate[images]=*
+http://localhost:1337/api/products?populate[images]=true
+http://localhost:1337/api/products?populate[images][fields][0]=url
