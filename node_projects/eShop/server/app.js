@@ -1,6 +1,7 @@
 import express from "express";
 // const express = require('express');
 import dotenv from 'dotenv';
+import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 //import authJwt from "./helpers/jwt.js";
@@ -20,6 +21,13 @@ dotenv.config();
 const app = express();
 //mongoose.connect('mongodb+srv://jeweltutin:m0tLp7QWvxdq4HgX@cluster0.thdzvng.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=eshop-database')
 //mongoose.connect('mongodb+srv://jeweltutin:m0tLp7QWvxdq4HgX@cluster0.thdzvng.mongodb.net/eshop-database')
+
+//app.use(cors());
+
+app.use(cors({
+    origin: "http://localhost:3000", // Allow requests from Next.js frontend
+    credentials: true // Allow cookies and authentication headers
+}));
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING)
 .then(() => {

@@ -1,9 +1,9 @@
 import { expressjwt } from "express-jwt";
 
 const secret = process.env.JWT_SECRET;
+const api = process.env.API_URL;
+
 function authJwt() {
-    //const secret = process.env.secret;
-    const api = process.env.API_URL;
     return expressjwt({
         secret,
         algorithms: ['HS256'],
@@ -17,6 +17,20 @@ function authJwt() {
             `${api}/register`,
             `${api}/product/featured-count`,
         ]
-    })
+    });
 }
-export default authJwt;
+
+// Middleware for role-based access to dashboard
+function authorizeRole(roles) {
+    return (req, res, next) => {
+        const userRole = req.user?.role;  // Assume role is decoded in the JWT payload
+
+        if (!roles.includes(userRole)) {
+            // Deny access and redirect if the role doesn't match
+            return res.status(403).json({ message: "Access forbidden: insufficient permissions" });
+        }
+        next(); // Proceed if role is authorized
+    };
+}
+
+export { authJwt, authorizeRole };
