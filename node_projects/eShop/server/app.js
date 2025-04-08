@@ -9,6 +9,7 @@ import errorHandler from "./helpers/error-handler.js";
 
 import productRoutes from './routes/product.route.js';
 import categoryRoutes from './routes/category.route.js';
+import brandRoutes from './routes/brand.route.js';
 import userRoutes from './routes/user.route.js';
 import orderRoutes from './routes/order.route.js';
 import slideRoutes from './routes/slide.route.js';
@@ -60,6 +61,7 @@ app.get('/', (req, res) => {
 
 app.use(`${api}/product`, productRoutes);
 app.use(`${api}/category`, categoryRoutes);
+app.use(`${api}/brand`, brandRoutes);
 app.use(`${api}/slide`, slideRoutes);
 
 
@@ -67,6 +69,15 @@ app.use(`${api}/slide`, slideRoutes);
 //app.use(authJwt());
 app.use(`${api}/user`, userRoutes);
 app.use(`${api}/order`, orderRoutes);
+
+
+// ❗ Catch JWT errors here
+app.use((err, req, res, next) => {
+    if (err.name === "UnauthorizedError") {
+        return res.status(401).json({ message: "Not authorized!" });
+    }
+    next(err);
+});
 
 app.listen(5000, () => {
     //console.log(api);

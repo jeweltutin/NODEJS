@@ -14,10 +14,6 @@ const brandSchema = new mongoose.Schema({
     banner: {
         type: String // Store the banner image URL
     },
-    products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product' // Reference to the Product model
-    }],
     slug: {
         type: String,
         unique: true

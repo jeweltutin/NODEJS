@@ -13,6 +13,21 @@ export const getSlides = async (req, res) => {
     }
 };
 
+export const getSlideById = async (req, res) => {
+    try {
+        const { id } = req.params; // Get the slide ID from the route parameter
+        const slide = await Slide.findById(id); // Find the slide by ID
+        
+        if (!slide) {
+            return res.status(404).json({ message: "Slide not found" });
+        }
+        
+        res.json(slide); // Return the found slide
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch slide", error });
+    }
+};
+
 // Create a new slide (Admin only)
 /* export const createSlide = async (req, res) => {
     try {

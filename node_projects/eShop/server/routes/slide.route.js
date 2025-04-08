@@ -1,5 +1,5 @@
 import express from "express";
-import { getSlides, createSlide, updateSlide, deleteSlide } from "../controller/slide.controller.js";
+import { getSlides, getSlideById, createSlide, updateSlide, deleteSlide } from "../controller/slide.controller.js";
 import { expressjwt } from "express-jwt";
 import uploadFile from "../helpers/multer.js";
 import dotenv from 'dotenv';
@@ -37,6 +37,7 @@ const authorizeRole = (roles) => {
 // ✅ Apply `authJwt` before `authorizeRole`
 // Protected GET route
 router.get("/", authJwt, authorizeRole(['admin', 'editor']), getSlides);
+router.get("/:id", authJwt, authorizeRole(['admin', 'editor']), getSlideById);
 
 // ✅ Protect other routes with authJwt
 router.post("/", authJwt, authorizeRole(['admin', 'editor']), uploadFile.single("image"), createSlide);

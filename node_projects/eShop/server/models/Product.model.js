@@ -22,6 +22,7 @@ const productSchema = mongoose.Schema({
     brand: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Brand',
+        required: false
     },
     mrp : {
         type: Number,
