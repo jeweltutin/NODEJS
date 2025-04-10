@@ -1,17 +1,20 @@
 //const mongoose = require('mongoose');
 import mongoose from 'mongoose';
+import slugify from 'slugify';
 
 const categorySchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
     },
-    icon: {
-        type: String,
-    },
+    icon: String,
     color: {
         type: String,
     },
+    banner: String,
     products: [
         {
             type: mongoose.Schema.Types.ObjectId,
