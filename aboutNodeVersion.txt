@@ -1,3 +1,37 @@
+C:\Users\ashra>node -v
+v22.15.0      // using latest in laptop 20-05-2025
+
+//NVM for Windows
+nvm-setup.exe 5.35 MB -- download and install
+https://github.com/coreybutler/nvm-windows/releases
+The error you're seeing is because the version of Node.js installed on your system (22.15.0) is not compatible with the grocery-admin project. The project requires Node.js in the range: >=18.0.0 <=20.x.x
+
+✅ Solution Options:
+Option 1: Switch Node.js Version Using nvm (Recommended)
+If you don’t already have Node Version Manager (nvm) for Windows, install it first.
+
+Check available versions:
+
+powershell
+nvm list available
+Install a compatible version (e.g., 20.12.2):
+
+powershell
+nvm install 20.12.2
+
+powershell
+nvm use 20.12.2
+
+powershell
+node -v
+
+To see all Node.js versions you've installed using NVM on Windows, just run:
+nvm list
+
+powershell
+yarn install
+
+
 C:\Users\admin>node -v
 v16.18.0C:\Users\admin>node -v
 v16.18.0
